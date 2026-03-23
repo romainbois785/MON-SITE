@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DESIGN YOUR BELT | JUDOGI STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --neon-red: #ff003c;
+            --gold: #d4af37;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .master-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: 0 0 50px rgba(0,0,0,1);
+        }
+
+        /* --- VISUEL DE LA CEINTURE --- */
+        .belt-preview-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .belt-display {
+            width: 80%;
+            height: 60px;
+            background: #000; /* Couleur par défaut */
+            border-radius: 5px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 40px;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Texture grain de riz simulée */
+        .belt-display::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0.2) 4px);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .embroidery-text {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.5em;
+            color: var(--gold);
+            letter-spacing: 5px;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+            z-index: 2;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        /* --- FORMULAIRE DE DESIGN --- */
+        .config-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2em;
+            background: linear-gradient(90deg, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .tagline { color: var(--gold); font-weight: bold; margin-bottom: 30px; font-size: 0.8em; letter-spacing: 3px; }
+
+        .control-group { margin-bottom: 20px; }
+
+        label {
+            display: block;
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            color: #888;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-family: inherit;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
+
+        .color-dots {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        .dot.active { border-color: #fff; transform: scale(1.2); }
+
+        .btn-order {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 18px;
+            border-radius: 10px;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-order:hover {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* --- NAVIGATION --- */
+        .nav-zone {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .nav-link {
+            flex: 1;
+            text-decoration: none;
+            color: #555;
+            font-size: 0.7em;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover { color: #fff; border-color: #fff; }
+
+    </style>
+</head>
+<body>
+
+    <div class="master-container">
+        
+        <div class="belt-preview-section">
+            <div class="belt-display" id="belt-preview">
+                <div class="embroidery-text" id="text-preview">VOTRE NOM</div>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.7em; color: #555;">APERÇU DE LA BRODERIE FINALE</p>
+        </div>
+
+        <div class="config-panel">
+            <h1>BELT DESIGNER</h1>
+            <p class="tagline">MAÎTRISE & TRADITION</p>
+
+            <div class="control-group">
+                <label>Couleur de la Ceinture</label>
+                <div class="color-dots">
+                    <div class="dot active" style="background: #000;" onclick="changeBelt('#000', this)"></div>
+                    <div class="dot" style="background: #4a2511;" onclick="changeBelt('#4a2511', this)"></div>
+                    <div class="dot" style="background: #003366;" onclick="changeBelt('#003366', this)"></div>
+                    <div class="dot" style="background: #006633;" onclick="changeBelt('#006633', this)"></div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Texte à broder (Katakana ou Latin)</label>
+                <input type="text" id="belt-input" placeholder="Ex: M. RINER" maxlength="15" oninput="updateText()">
+            </div>
+
+            <div class="control-group">
+                <label>Fil de broderie</label>
+                <select id="thread-color" onchange="updateText()">
+                    <option value="#d4af37">OR TRADITIONNEL</option>
+                    <option value="#c0c0c0">ARGENT MÉTAL</option>
+                    <option value="#ff003c">ROUGE PASSION</option>
+                    <option value="#ffffff">BLANC PUR</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Taille (cm)</label>
+                <select>
+                    <option>260cm</option>
+                    <option>280cm</option>
+                    <option>300cm</option>
+                    <option>320cm</option>
+                </select>
+            </div>
+
+            <button class="btn-order">COMMANDER MA CEINTURE</button>
+
+            <div class="nav-zone">
+                <a href="ceinture.html" class="nav-link">← Retour Ceintures</a>
+                <a href="index.html" class="nav-link">Menu Principal ⌂</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function updateText() {
+            const val = document.getElementById('belt-input').value;
+            const thread = document.getElementById('thread-color').value;
+            const preview = document.getElementById('text-preview');
+            
+            preview.innerText = val || "VOTRE NOM";
+            preview.style.color = thread;
+            
+            // Petit effet de lueur sur le fil
+            preview.style.textShadow = `0 0 10px ${thread}44`;
+        }
+
+        function changeBelt(color, el) {
+            document.getElementById('belt-preview').style.background = color;
+            
+            // Update active dot
+            document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+            el.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
