@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CONFIGURATEUR DOSSARD | JUDOGI STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --neon-red: #ff003c;
+            --glass: rgba(0, 0, 0, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hautdekim.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            width: 100%;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 50px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- APERÇU DU DOSSARD --- */
+        .preview-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dossard-canvas {
+            width: 320px;
+            height: 400px;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 4px solid #000;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .display-name {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2.5em;
+            margin-top: 50px;
+            text-align: center;
+            width: 100%;
+            border-bottom: 8px solid #000;
+            padding-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .display-club {
+            margin-top: 40px;
+            font-size: 2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .display-country {
+            margin-top: auto;
+            font-size: 4.5em;
+            font-weight: 900;
+            opacity: 0.1;
+            letter-spacing: 5px;
+        }
+
+        /* --- CONFIGURATION --- */
+        .config-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2em;
+            color: var(--neon-red);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle { margin-bottom: 35px; color: #888; letter-spacing: 1px; }
+
+        .input-group { margin-bottom: 25px; }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.8em;
+            font-weight: 700;
+            color: #ccc;
+            text-transform: uppercase;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1em;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--neon-red);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .btn-order {
+            background: var(--neon-red);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 25px;
+            transition: 0.4s;
+            letter-spacing: 1px;
+        }
+
+        .btn-order:hover {
+            box-shadow: 0 0 30px var(--neon-red);
+            transform: scale(1.02);
+        }
+
+        /* --- NAVIGATION --- */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            text-decoration: none;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.75em;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        @media (max-width: 600px) {
+            .main-container { padding: 30px; }
+            .nav-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        
+        <div class="preview-box">
+            <div class="dossard-canvas" id="dossard">
+                <div class="display-name" id="prev-name">NOM</div>
+                <div class="display-club" id="prev-club">CLUB</div>
+                <div class="display-country">FRA</div>
+            </div>
+        </div>
+
+        <div class="config-form">
+            <h1>CUSTOM DOSSARD</h1>
+            <div class="subtitle">Édition Limitée • IJF Standards</div>
+
+            <div class="input-group">
+                <label>Nom du Combattant</label>
+                <input type="text" id="input-name" placeholder="Tapez votre nom..." maxlength="12" oninput="updateDossard()">
+            </div>
+
+            <div class="input-group">
+                <label>Nom du Club</label>
+                <input type="text" id="input-club" placeholder="Votre club..." maxlength="15" oninput="updateDossard()">
+            </div>
+
+            <div class="input-group">
+                <label>Couleur d'impression</label>
+                <select id="input-color" onchange="updateDossard()">
+                    <option value="#000000">NOIR CLASSIQUE</option>
+                    <option value="#0033aa">BLEU COMPÉTITION</option>
+                    <option value="#cc0000">ROUGE ELITE</option>
+                </select>
+            </div>
+
+            <button class="btn-order">COMMANDER LE DOSSARD</button>
+
+            <div class="nav-buttons">
+                <a href="hautdekimono.html" class="nav-btn">← Retour Vestes</a>
+                <a href="index.html" class="nav-btn">Menu Principal ⌂</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function updateDossard() {
+            const name = document.getElementById('input-name').value;
+            const club = document.getElementById('input-club').value;
+            const color = document.getElementById('input-color').value;
+
+            // Mise à jour du nom
+            const nameElem = document.getElementById('prev-name');
+            nameElem.innerText = name.toUpperCase() || "NOM";
+            nameElem.style.color = color;
+            nameElem.style.borderBottomColor = color;
+
+            // Mise à jour du club
+            const clubElem = document.getElementById('prev-club');
+            clubElem.innerText = club.toUpperCase() || "CLUB";
+            clubElem.style.color = color;
+            
+            // Bordure du dossard assortie pour le fun
+            document.getElementById('dossard').style.borderColor = color;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VESTES BLEUES | JUDOGI STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Syncopate:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --red: #ff003c;
+            --white: #f1faee;
+            --dark: #050505;
+            --border: rgba(255, 255, 255, 0.1);
+            --gold: #d4af37;
+            --blue-glow: rgba(0, 102, 255, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--dark);
+            font-family: 'Kanit', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER --- */
+        .page-header {
+            height: 50vh;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), var(--dark)), url('hautdekim.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-bottom: 2px solid var(--red);
+        }
+
+        .header-tag {
+            position: absolute;
+            bottom: 20px;
+            right: 50px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7em;
+            color: var(--red);
+            letter-spacing: 2px;
+        }
+
+        .page-header h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2em, 8vw, 4em);
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #444, #fff, #444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-nav { position: absolute; top: 40px; left: 50px; z-index: 20; }
+        .btn-back {
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Syncopate';
+            font-size: 0.7em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.4s;
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            border-radius: 2px;
+        }
+        .btn-back:hover { color: var(--red); background: rgba(255,0,60,0.1); }
+
+        /* --- GRID PRODUITS --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            padding: 0 50px 100px;
+            max-width: 1500px;
+            margin: -80px auto 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .product-card {
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 600px;
+        }
+
+        /* INFOS DE SCAN (Détail sympa) */
+        .scan-line {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6em;
+            color: rgba(255,255,255,0.4);
+            text-align: right;
+            pointer-events: none;
+        }
+
+        /* IMAGE PLEIN CADRE */
+        .product-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85) contrast(1.1);
+            transition: 0.8s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+            filter: brightness(1.1) contrast(1.2) saturate(1.2);
+        }
+
+        /* OVERLAY TEXTE */
+        .content-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.85) 45%, transparent 100%);
+            z-index: 5;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover .content-overlay { opacity: 1; transform: translateY(0); }
+
+        .tech-specs {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7em;
+            color: var(--red);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .product-card h2 { font-family: 'Syncopate'; font-size: 1.6em; margin-bottom: 10px; }
+        .product-card p { color: #888; font-size: 0.85em; margin-bottom: 25px; line-height: 1.6; }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .price { font-size: 2.2em; font-weight: 900; color: var(--white); }
+
+        .btn-action {
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid var(--red);
+            color: white;
+            text-decoration: none;
+            font-family: 'Syncopate';
+            font-size: 0.7em;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .btn-action:hover { 
+            background: var(--red); 
+            box-shadow: 0 0 30px rgba(255,0,60,0.5); 
+        }
+
+        /* --- SECTION INFOS "LÉGENDE" --- */
+        .knowledge-section {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 50px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .k-item h4 {
+            font-family: 'Syncopate';
+            font-size: 0.8em;
+            color: var(--red);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .k-item p {
+            font-size: 0.9em;
+            color: #777;
+            line-height: 1.7;
+        }
+
+        /* --- BORDURE TOURNANTE --- */
+        .product-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, var(--red));
+            animation: rotate 4s linear infinite; display: none; z-index: 2;
+        }
+        .product-card:hover::before { display: block; }
+        .product-card::after { content: ''; position: absolute; inset: 2px; background: #000; z-index: 3; }
+        .product-img, .content-overlay { z-index: 4; }
+
+        /* GOLD VARIANT */
+        .gold-edition::before { background: conic-gradient(transparent, transparent, var(--gold)) !important; }
+        .gold-edition .tech-specs { color: var(--gold); }
+        .gold-edition .btn-action { border-color: var(--gold); color: var(--gold); }
+        .gold-edition .btn-action:hover { background: var(--gold); color: #000; }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        footer { text-align: center; padding: 100px; color: #222; font-family: 'Space Mono'; font-size: 0.7em; }
+
+        @media (max-width: 900px) {
+            .knowledge-section { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="page-header">
+        <div class="back-nav">
+            <a href="hautdekimono.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> CATALOGUE</a>
+        </div>
+        <h1>BLUE ARMOR</h1>
+        <div class="header-tag">SERIES 02 // INDIGO HEAVY</div>
+    </header>
+
+    <div class="product-grid">
+        
+        <div class="product-card">
+            <div class="scan-line">FILE: LIGHT_01.EXE<br>STATUS: DEPLOYED</div>
+            <div class="product-img">
+                <img src="yukarilightbleu.png" alt="Yukari Light Bleu">
+            </div>
+            <div class="content-overlay">
+                <span class="tech-specs">WEIGHT: 450G // SASHIKO WEAVE</span>
+                <h2>YUKARI LIGHT</h2>
+                <p>La veste de combat par excellence pour les climats chauds. Une agilité sans compromis sur la traction.</p>
+                <div class="price-row">
+                    <span class="price">75€</span>
+                    <a href="#" class="btn-action">ARMER</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card gold-edition">
+            <div class="scan-line" style="color:var(--gold)">FILE: MASTER_GLD.EXE<br>STATUS: LIMITED</div>
+            <div class="product-img">
+                <img src="mastergoldbleu.png" alt="Master Gold Bleu">
+            </div>
+            <div class="content-overlay">
+                <span class="tech-specs">WEIGHT: 750G // COMPETITION READY</span>
+                <h2 style="color: var(--gold);">MASTER GOLD</h2>
+                <p>L'excellence pour la compétition. Broderies haute définition et revers renforcés anti-étranglement.</p>
+                <div class="price-row">
+                    <span class="price">140€</span>
+                    <a href="#" class="btn-action">ARMER</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="scan-line">FILE: HEAVY_950.EXE<br>STATUS: REINFORCED</div>
+            <div class="product-img">
+                <img src="kodokanheavybleu.png" alt="Kodokan Heavy Bleu">
+            </div>
+            <div class="content-overlay">
+                <span class="tech-specs">WEIGHT: 950G // ARMOR CORE</span>
+                <h2>KODOKAN HEAVY</h2>
+                <p>Le blindage absolu. Un tissage double-épaisseur quasi-impossible à saisir pour votre adversaire.</p>
+                <div class="price-row">
+                    <span class="price">110€</span>
+                    <a href="#" class="btn-action">ARMER</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="knowledge-section">
+        <div class="k-item">
+            <h4><i class="fa-solid fa-droplet"></i> INDIGO SACRÉ</h4>
+            <p>Le bleu de nos vestes est inspiré de l'indigo traditionnel utilisé par les Samouraïs pour ses propriétés antibactériennes et sa résistance au temps.</p>
+        </div>
+        <div class="k-item">
+            <h4><i class="fa-solid fa-scroll"></i> SASHIKO TECH</h4>
+            <p>Le tissage "grain de riz" n'est pas qu'esthétique : il a été inventé au Japon pour démultiplier la surface d'absorption de la sueur tout en restant indéchirable.</p>
+        </div>
+        <div class="k-item">
+            <h4><i class="fa-solid fa-shield-halved"></i> ARMURE MODERNE</h4>
+            <p>Toutes nos vestes Kodokan passent un test de traction de 1000 Newtons pour garantir qu'aucune couture ne lâche en plein Randori.</p>
+        </div>
+    </section>
+
+    <footer>
+        [ 2026 // JUDOGI STORE OPERATIONAL INTERFACE ]<br>
+        DESIGNED FOR THE UNSTOPPABLE.
+    </footer>
+
+</body>
+</html>
