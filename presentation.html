@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>L'HISTOIRE | JUDOGI STORE</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@900&family=Syncopate:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Effet Hero similaire à l'Index */
+        .pres-hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.6), var(--dark)), url('https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--red);
+        }
+
+        .pres-hero h1 {
+            font-family: 'Syncopate';
+            font-size: clamp(2em, 8vw, 4em);
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: -60px auto 100px; /* Chevauchement sur le hero */
+            padding: 60px;
+            background: rgba(5, 5, 5, 0.95);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Décorations d'angles façon "Tech" */
+        .content-wrapper::before, .content-wrapper::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--red);
+        }
+        .content-wrapper::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .content-wrapper::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+        .text-body {
+            font-family: 'Kanit';
+            font-weight: 300;
+            line-height: 2;
+            color: #ccc;
+            font-size: 1.1em;
+        }
+
+        .text-body strong {
+            color: var(--red);
+            font-family: 'Syncopate';
+            font-size: 0.9em;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 50px;
+            font-family: 'Space Mono';
+            color: var(--red);
+            text-decoration: none;
+            letter-spacing: 3px;
+            font-size: 0.8em;
+            transition: 0.3s;
+            border: 1px solid var(--red);
+            padding: 15px 30px;
+        }
+
+        .back-btn:hover {
+            background: var(--red);
+            color: white;
+            box-shadow: 0 0 20px var(--red);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="scroll-progress"></div>
+
+    <section class="pres-hero">
+        <span style="font-family:'Space Mono'; color:var(--red); letter-spacing:10px; margin-bottom: 20px;">ACCESSING_FILE_001</span>
+        <h1>PRESENTATION</h1>
+    </section>
+
+    <div class="content-wrapper">
+        <article class="text-body">
+            <p>
+                Le projet <strong>JUDOGI STORE</strong> est né d'une volonté de moderniser l'approche visuelle des arts martiaux traditionnels. Dans un monde où le digital prend le pas, l'esthétique du Judo mérite un écrin à la hauteur de sa rigueur.
+            </p>
+            
+            <p>
+                Chaque élément de ce site, de la typographie brutale à la gestion des contrastes, a été pensé pour refléter l'intensité d'un <strong>Randori</strong>. Nous ne vendons pas seulement du coton et des coutures, nous proposons l'armure du Judoka moderne.
+            </p>
+
+            <p style="border-left: 2px solid var(--red); padding-left: 25px; font-style: italic; color: #888;">
+                Développé avec passion dans le cadre du TD1 à Paris Nanterre, ce site explore les limites du design web "dark-mode" et de l'interactivité utilisateur.
+            </p>
+
+            <div style="text-align: center;">
+                <a href="index.html" class="back-btn">
+                    <i class="fa-solid fa-chevron-left"></i> RETOUR_AU_STORE
+                </a>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <span class="footer-name">ROMAIN BOIS</span>
+        <span class="footer-sub">TD1 — PARIS NANTERRE</span>
+        <a href="https://www.instagram.com/r0mbo._/" target="_blank" class="insta-footer">
+            <i class="fa-brands fa-instagram"></i> @R0MBO._
+        </a>
+    </footer>
+
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        };
+    </script>
+
+</body>
+</html>

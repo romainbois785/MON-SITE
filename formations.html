@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FORMATIONS | JUDOGI STORE</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@900&family=Syncopate:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Effet Hero identique à Présentation et Liens */
+        .pres-hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.7), var(--dark)), url('https://images.unsplash.com/photo-1552072092-7f9b8d63efcb?q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--red);
+        }
+
+        .pres-hero h1 {
+            font-family: 'Syncopate';
+            font-size: clamp(2em, 8vw, 4em);
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
+        }
+
+        .content-wrapper {
+            max-width: 1000px;
+            margin: -60px auto 100px;
+            padding: 60px;
+            background: rgba(5, 5, 5, 0.95);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-wrapper::before, .content-wrapper::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--red);
+        }
+        .content-wrapper::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .content-wrapper::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+        /* Roadmap stylisée */
+        .roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            align-items: center;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .step-card:hover {
+            border-color: var(--red);
+            background: rgba(255, 0, 60, 0.03);
+            transform: translateX(10px);
+        }
+
+        .step-number {
+            font-family: 'Syncopate';
+            font-size: 2.5em;
+            color: var(--red);
+            opacity: 0.3;
+        }
+
+        .step-info h3 {
+            font-family: 'Syncopate';
+            font-size: 1em;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .step-info p {
+            font-family: 'Kanit';
+            color: #aaa;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .status-tag {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-family: 'Space Mono';
+            font-size: 0.6em;
+            padding: 4px 12px;
+            border: 1px solid var(--red);
+            color: var(--red);
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 50px;
+            font-family: 'Space Mono';
+            color: var(--red);
+            text-decoration: none;
+            letter-spacing: 3px;
+            font-size: 0.8em;
+            transition: 0.3s;
+            border: 1px solid var(--red);
+            padding: 15px 30px;
+        }
+
+        .back-btn:hover {
+            background: var(--red);
+            color: white;
+            box-shadow: 0 0 20px var(--red);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="scroll-progress"></div>
+
+    <section class="pres-hero">
+        <span style="font-family:'Space Mono'; color:var(--red); letter-spacing:10px; margin-bottom: 20px;">CAREER_PATH // 002</span>
+        <h1>FORMATIONS</h1>
+    </section>
+
+    <div class="content-wrapper">
+        <div class="roadmap">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <div class="step-info">
+                    <span class="status-tag">ACTIVE</span>
+                    <h3>LICENCE MIASHS</h3>
+                    <p>Université Paris Nanterre. Focus sur le développement web et l'analyse de données appliquées aux sciences humaines.</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <div class="step-info">
+                    <span class="status-tag" style="border-color:#ffd700; color:#ffd700;">TARGET</span>
+                    <h3>MASTER MIAGE</h3>
+                    <p>Ingénierie logicielle et management des systèmes d'information. Spécialisation en gestion d'entreprise digitale.</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <div class="step-info">
+                    <span class="status-tag" style="border-color:gray; color:gray;">VISION</span>
+                    <h3>FULL-STACK DEV</h3>
+                    <p>Maîtrise complète de l'écosystème web pour concevoir des solutions performantes et esthétiques.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-chevron-left"></i> RETOUR_AU_STORE
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-name">ROMAIN BOIS</span>
+        <span class="footer-sub">TD1 — PARIS NANTERRE</span>
+        <a href="https://www.instagram.com/r0mbo._/" target="_blank" class="insta-footer">
+            <i class="fa-brands fa-instagram"></i> @R0MBO._
+        </a>
+    </footer>
+
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RESSOURCES | JUDOGI STORE</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@900&family=Syncopate:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Réutilisation du style Hero de la page Présentation */
+        .pres-hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.6), var(--dark)), url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--red);
+        }
+
+        .pres-hero h1 {
+            font-family: 'Syncopate';
+            font-size: clamp(2em, 8vw, 4em);
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: -60px auto 100px;
+            padding: 60px;
+            background: rgba(5, 5, 5, 0.95);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-wrapper::before, .content-wrapper::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--red);
+        }
+        .content-wrapper::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .content-wrapper::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+        /* Style spécifique pour la liste de liens */
+        .links-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--red);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .resource-item:hover {
+            background: rgba(255, 0, 60, 0.1);
+            transform: translateX(10px);
+        }
+
+        .resource-info h3 {
+            font-family: 'Syncopate';
+            font-size: 0.9em;
+            color: white;
+            letter-spacing: 2px;
+        }
+
+        .resource-info p {
+            font-family: 'Space Mono';
+            font-size: 0.7em;
+            color: #666;
+        }
+
+        .resource-item i {
+            color: var(--red);
+            font-size: 1.2em;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 50px;
+            font-family: 'Space Mono';
+            color: var(--red);
+            text-decoration: none;
+            letter-spacing: 3px;
+            font-size: 0.8em;
+            transition: 0.3s;
+            border: 1px solid var(--red);
+            padding: 15px 30px;
+        }
+
+        .back-btn:hover {
+            background: var(--red);
+            color: white;
+            box-shadow: 0 0 20px var(--red);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="scroll-progress"></div>
+
+    <section class="pres-hero">
+        <span style="font-family:'Space Mono'; color:var(--red); letter-spacing:10px; margin-bottom: 20px;">EXTERNAL_RESOURCES // 003</span>
+        <h1>LIENS UTILES</h1>
+    </section>
+
+    <div class="content-wrapper">
+        <div class="links-grid">
+            <a href="https://www.ffjudo.com" target="_blank" class="resource-item">
+                <div class="resource-info">
+                    <h3>FF JUDO</h3>
+                    <p>Fédération Française de Judo et DA</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+
+            <a href="https://www.ijf.org" target="_blank" class="resource-item">
+                <div class="resource-info">
+                    <h3>IJF.ORG</h3>
+                    <p>International Judo Federation - World Ranking</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+
+            <a href="https://www.kodokanjudoinstitute.org" target="_blank" class="resource-item">
+                <div class="resource-info">
+                    <h3>KODOKAN</h3>
+                    <p>L'Institut d'origine du Judo (Tokyo)</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-chevron-left"></i> RETOUR_AU_STORE
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-name">ROMAIN BOIS</span>
+        <span class="footer-sub">TD1 — PARIS NANTERRE</span>
+        <a href="https://www.instagram.com/r0mbo._/" target="_blank" class="insta-footer">
+            <i class="fa-brands fa-instagram"></i> @R0MBO._
+        </a>
+    </footer>
+
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        };
+    </script>
+
+</body>
+</html>
