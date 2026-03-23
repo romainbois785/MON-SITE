@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ARMURERIE BLANCHE | JUDOGI STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --pure-white: #ffffff;
+            --silver: #c0c0c0;
+            --gold: #d4af37;
+            --dark-card: rgba(15, 15, 15, 0.95);
+            --accent-silver: #8e8e8e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: radial-gradient(circle at top, #1a1a1a 0%, #050505 100%);
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* --- BARRE DE NAVIGATION --- */
+        .top-nav {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-group { display: flex; gap: 20px; }
+
+        .btn-nav {
+            text-decoration: none;
+            color: #666;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.7em;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-nav:hover { color: var(--pure-white); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+        /* --- HEADER --- */
+        header { text-align: center; margin-bottom: 50px; }
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2.2em;
+            letter-spacing: 5px;
+            background: linear-gradient(90deg, #888, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        /* --- GRID DES PRODUITS --- */
+        .armory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            transition: 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--pure-white);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: var(--pure-white);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-weight: 800;
+            font-size: 0.7em;
+            text-transform: uppercase;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 220px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .product-img img { max-width: 80%; max-height: 80%; object-fit: contain; }
+
+        .grammage { color: var(--gold); font-weight: 700; font-size: 0.9em; margin-bottom: 10px; display: block; }
+        h2 { font-family: 'Syncopate'; font-size: 1.1em; margin-bottom: 15px; color: #fff; }
+        
+        .specs { list-style: none; margin-bottom: 25px; }
+        .specs li { font-size: 0.9em; color: #bbb; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .specs i { color: var(--silver); font-size: 0.7em; }
+
+        .footer-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+
+        .price { font-size: 1.6em; font-weight: 700; }
+        .btn-buy {
+            background: var(--pure-white);
+            color: #000;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.9em;
+            transition: 0.3s;
+        }
+        .btn-buy:hover { box-shadow: 0 0 15px rgba(255,255,255,0.5); transform: scale(1.05); }
+
+        /* --- BONUS --- */
+        .bonus-box {
+            max-width: 1200px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .bonus-card {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid var(--gold);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .bonus-card i { font-size: 2em; color: var(--gold); margin-bottom: 15px; }
+        .bonus-card h4 { color: var(--gold); margin-bottom: 10px; text-transform: uppercase; font-size: 0.9em; }
+        .bonus-card p { font-size: 0.85em; color: #999; }
+
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="nav-group">
+            <a href="index.html" class="btn-nav"><i class="fa-solid fa-house"></i> Accueil</a>
+            <a href="hautdekimono.html" class="btn-nav"><i class="fa-solid fa-chevron-left"></i> Tous les Hauts</a>
+        </div>
+        <div class="btn-nav" style="cursor: default; opacity: 0.5;">Catégorie : Blanche</div>
+    </nav>
+
+    <header>
+        <h1>Vestes Blanches</h1>
+        <p style="color: var(--silver); letter-spacing: 2px;">LA TRADITION RENCONTRE LA PERFORMANCE</p>
+    </header>
+
+    <div class="armory-grid">
+        
+        <div class="product-card">
+            <div class="product-tag">Initiation</div>
+            <div class="product-img">
+                <img src="IMAGE_BLANC_1.png" alt="Kimono Blanc Léger">
+            </div>
+            <span class="grammage">450 G/M² - SOUPLLESSE TOTALE</span>
+            <h2>ZEN-WHITE LIGHT</h2>
+            <ul class="specs">
+                <li><i class="fa-solid fa-circle-check"></i> Idéal débutants & Randori souple</li>
+                <li><i class="fa-solid fa-circle-check"></i> 100% coton respirant</li>
+                <li><i class="fa-solid fa-circle-check"></i> Liberté de mouvement accrue</li>
+            </ul>
+            <div class="footer-card">
+                <div class="price">69€</div>
+                <a href="#" class="btn-buy">ARMER</a>
+            </div>
+        </div>
+
+        <div class="product-card" style="border-color: var(--gold);">
+            <div class="product-tag" style="background: var(--gold);">Classique</div>
+            <div class="product-img">
+                <img src="IMAGE_BLANC_2.png" alt="Kimono Blanc Entraînement">
+            </div>
+            <span class="grammage">650 G/M² - POLYVALENCE</span>
+            <h2>BUSHIDO CLASSIC</h2>
+            <ul class="specs">
+                <li><i class="fa-solid fa-circle-check"></i> Le standard du Dojo</li>
+                <li><i class="fa-solid fa-circle-check"></i> Col renforcé mi-dur</li>
+                <li><i class="fa-solid fa-circle-check"></i> Rapport qualité/prix imbattable</li>
+            </ul>
+            <div class="footer-card">
+                <div class="price">89€</div>
+                <a href="#" class="btn-buy" style="background: var(--gold);">ARMER</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-tag">Maître</div>
+            <div class="product-img">
+                <img src="IMAGE_BLANC_3.png" alt="Kimono Blanc Lourd">
+            </div>
+            <span class="grammage">850 G/M² - ARMURE TRADITIONNELLE</span>
+            <h2>SENSEI MASTER-WHITE</h2>
+            <ul class="specs">
+                <li><i class="fa-solid fa-circle-check"></i> Tissage grain de riz premium</li>
+                <li><i class="fa-solid fa-circle-check"></i> Coupe japonaise authentique</li>
+                <li><i class="fa-solid fa-circle-check"></i> Résistance extrême à la traction</li>
+            </ul>
+            <div class="footer-card">
+                <div class="price">135€</div>
+                <a href="#" class="btn-buy">ARMER</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bonus-box">
+        <div class="bonus-card">
+            <i class="fa-solid fa-snowflake"></i>
+            <h4>Blancheur Éclatante</h4>
+            <p>Traitement spécial anti-jaunissement pour garder un blanc pur.</p>
+        </div>
+        <div class="bonus-card">
+            <i class="fa-solid fa-scissors"></i>
+            <h4>Coupe Ajustable</h4>
+            <p>Design ergonomique qui s'adapte à toutes les carrures.</p>
+        </div>
+        <div class="bonus-card">
+            <i class="fa-solid fa-hand-fist"></i>
+            <h4>Grip Inégalable</h4>
+            <p>Matière texturée pour un contrôle parfait de vos saisies.</p>
+        </div>
+    </div>
+
+</body>
+</html>

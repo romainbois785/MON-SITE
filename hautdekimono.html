@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vestes de Judo | JUDOGI STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --red: #e63946;
+            --white: #f1faee;
+            --dark: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('hautdekim.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: 'Kanit', sans-serif;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION HAUTE */
+        .top-nav {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #888;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.7em;
+            transition: 0.3s;
+            letter-spacing: 2px;
+        }
+        .back-link:hover { color: var(--red); }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.8em, 5vw, 3.5em);
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            text-align: center;
+            background: linear-gradient(90deg, #888, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 6px solid var(--red);
+            letter-spacing: 4px;
+        }
+
+        h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.5em;
+            margin: 80px 0 40px 0;
+            color: var(--red);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Style des liens sur les cartes */
+        .jacket-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+
+        .jacket-card {
+            background: #0a0a0a;
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+        }
+
+        .jacket-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, var(--red));
+            animation: rotate 4s linear infinite;
+            display: none;
+            z-index: 0;
+        }
+
+        .jacket-card:hover::before { display: block; }
+
+        .jacket-card::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: #0d0d0d;
+            border-radius: 22px;
+            z-index: 1;
+        }
+
+        .jacket-card > * { position: relative; z-index: 2; }
+
+        .jacket-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 0 40px rgba(230, 57, 70, 0.4);
+        }
+
+        .jacket-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+            transition: 0.5s;
+        }
+
+        .jacket-card:hover img {
+            transform: scale(1.15) rotate(-3deg);
+            filter: drop-shadow(0 0 20px var(--red));
+        }
+
+        .jacket-card h3 {
+            font-size: 1.8em;
+            margin: 20px 0 10px 0;
+            font-weight: 900;
+        }
+
+        .jacket-desc {
+            font-size: 0.9em;
+            color: #ccc;
+            height: 0;
+            opacity: 0;
+            transition: 0.4s;
+            overflow: hidden;
+        }
+
+        .jacket-card:hover .jacket-desc {
+            height: 60px;
+            opacity: 1;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--red);
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-size: 0.8em;
+            font-weight: 900;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+        }
+
+        .info-section {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            border-bottom: 4px solid var(--red);
+        }
+
+        .info-card h4 {
+            color: var(--red);
+            font-family: 'Syncopate', sans-serif;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-home {
+            margin: 80px 0;
+            text-decoration: none;
+            color: var(--white);
+            background: transparent;
+            padding: 15px 45px;
+            border-radius: 50px;
+            border: 2px solid var(--red);
+            transition: 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-home:hover {
+            background: var(--red);
+            box-shadow: 0 0 30px var(--red);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="index.html" class="back-link">← MENU PRINCIPAL</a>
+    </div>
+
+    <h1>NOS HAUTS DE KIMONO</h1>
+
+    <div class="product-grid">
+        
+        <a href="vestebleue.html" class="jacket-link">
+            <div class="jacket-card">
+                <img src="Kimonobleu.png" alt="Kimono Bleu">
+                <h3>Veste Bleue</h3>
+                <div class="jacket-desc">Conçue pour la compétition. Tissage grain de riz haute densité, ultra résistant aux tirages.</div>
+                <span class="tag">Voir les modèles →</span>
+            </div>
+        </a>
+
+        <a href="vesteblanche.html" class="jacket-link">
+            <div class="jacket-card">
+                <img src="Kimonoblanc.png" alt="Kimono Blanc">
+                <h3>Veste Blanche</h3>
+                <div class="jacket-desc">L'équilibre parfait entre confort et robustesse pour vos entraînements quotidiens.</div>
+                <span class="tag">Entraînement</span>
+            </div>
+        </a>
+
+        <a href="personnalisation-dossard.html" class="jacket-link">
+            <div class="jacket-card">
+                <img src="Dossard.png" alt="Dossard">
+                <h3>Dossard Perso</h3>
+                <div class="jacket-desc">Impression haute qualité de votre nom et club. Respecte les normes officielles.</div>
+                <span class="tag">Customiser →</span>
+            </div>
+        </a>
+    </div>
+
+    <h2>TECHNICAL SPECS</h2>
+    <div class="info-section">
+        <div class="info-card">
+            <h4>LE GRAMMAGE</h4>
+            <p>Nos vestes vont de <strong>450g</strong> (léger/enfant) à <strong>750g+</strong> (compétition). Plus le grammage est élevé, plus la veste est difficile à saisir.</p>
+        </div>
+        <div class="info-card">
+            <h4>GUIDE DES TAILLES</h4>
+            <p>Un judogi se choisit selon votre taille. Attention, le coton peut rétrécir de <strong>3 à 5%</strong> au premier lavage.</p>
+        </div>
+        <div class="info-card">
+            <h4>ENTRETIEN</h4>
+            <p>Lavage à froid (30°C max). <strong>Jamais de sèche-linge</strong> sous peine de perdre deux tailles instantanément !</p>
+        </div>
+    </div>
+
+    <a href="index.html" class="btn-home">← RETOUR VERS L'ACCUEIL </a>
+
+</body>
+</html>

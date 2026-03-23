@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SÉLECTION BLEUE | CYBER ARMORY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --neon-blue: #00d4ff;
+            --deep-blue: #001a33;
+            --gold: #d4af37;
+            --red: #ff003c;
+            --dark: #050505;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--dark);
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* --- ARRIÈRE PLAN ANIMÉ --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, #003366 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* --- NAVIGATION --- */
+        .top-nav {
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: var(--neon-blue);
+            font-family: 'Syncopate';
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover { text-shadow: 0 0 15px var(--neon-blue); transform: translateX(-5px); }
+
+        /* --- HEADER ÉPIQUE --- */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        header h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2em, 5vw, 4em);
+            letter-spacing: 10px;
+            background: linear-gradient(to right, #fff, var(--neon-blue), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+        }
+
+        /* --- GRID CYBER --- */
+        .armory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.5s;
+            backdrop-filter: blur(15px);
+        }
+
+        /* Effet de scan au survol */
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: -100%; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(transparent, var(--neon-blue), transparent);
+            transition: 0.8s;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .product-card:hover::before { top: 100%; }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.2);
+        }
+
+        .product-tag {
+            background: var(--neon-blue);
+            color: #000;
+            padding: 5px 15px;
+            font-weight: 900;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            position: absolute;
+            top: 20px; right: 20px;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            background: radial-gradient(rgba(0, 212, 255, 0.1), transparent);
+            border-radius: 50%;
+        }
+
+        .product-img img {
+            max-width: 90%;
+            filter: drop-shadow(0 0 20px var(--neon-blue));
+        }
+
+        .grammage {
+            color: var(--gold);
+            font-family: 'Syncopate';
+            font-size: 0.7em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        h2 {
+            font-family: 'Syncopate';
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .specs {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .specs li {
+            margin-bottom: 12px;
+            font-size: 1em;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .specs i { color: var(--neon-blue); }
+
+        .footer-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+        }
+
+        .price { font-size: 2em; font-weight: 900; font-family: 'Syncopate'; }
+
+        .btn-buy {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--neon-blue);
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Syncopate';
+            font-size: 0.8em;
+            transition: 0.4s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-buy:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 30px var(--neon-blue);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--neon-blue);
+            animation: pulse 1.5s infinite;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="hautdekimono.html" class="btn-back">
+            <i class="fa-solid fa-arrow-left"></i> Retour Armurerie
+        </a>
+        <div style="font-family: 'Syncopate'; font-size: 0.7em; color: var(--gold);">
+            <span class="status-dot"></span> SYSTÈME OPÉRATIONNEL
+        </div>
+    </nav>
+
+    <header>
+        <p style="color: var(--neon-blue); font-family: 'Syncopate'; font-size: 0.8em; letter-spacing: 5px;">SÉLECTION OFFICIELLE</p>
+        <h1>BLUE ARMOR</h1>
+    </header>
+
+    <div class="armory-grid">
+        
+        <div class="product-card">
+            <div class="product-tag">Léger</div>
+            <div class="product-img">
+                <img src="kimono_bleu_1.png" alt="Kimono Bleu">
+            </div>
+            <span class="grammage">450 G/M² // AGILITÉ</span>
+            <h2>NEON STRIKE</h2>
+            <ul class="specs">
+                <li><i class="fa-solid fa-microchip"></i> Fibres à séchage rapide</li>
+                <li><i class="fa-solid fa-wind"></i> Tissage grain de riz fin</li>
+                <li><i class="fa-solid fa-crosshairs"></i> Coupe ajustée compétition</li>
+            </ul>
+            <div class="footer-card">
+                <div class="price">85€</div>
+                <a href="#" class="btn-buy">SÉLECTIONNER</a>
+            </div>
+        </div>
+
+        <div class="product-card" style="border-color: var(--gold);">
+            <div class="product-tag" style="background: var(--gold); color: black;">Premium</div>
+            <div class="product-img">
+                <img src="kimono_bleu_2.png" alt="Kimono Bleu Elite">
+            </div>
+            <span class="grammage">750 G/M² // ÉLITE</span>
+            <h2>SHOGUN BLUE</h2>
+            <ul class="specs">
+                <li><i class="fa-solid fa-shield-halved"></i> Renforts Kevlar coudes</li>
+                <li><i class="fa-solid fa-medal"></i> Approuvé IJF 2026</li>
+                <li><i class="fa-solid fa-gem"></i> Coton Japonais Double-Tissage</li>
+            </ul>
+            <div class="footer-card">
+                <div class="price">129€</div>
+                <a href="#" class="btn-buy" style="border-color: var(--gold); color: var(--gold);">SÉLECTIONNER</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-tag">Lourd</div>
+            <div class="product-img">
+                <img src="kimono_bleu_3.png" alt="Kimono Bleu Tank">
+            </div>
+            <span class="grammage">950 G/M² // INEXPUGNABLE</span>
+            <h2>TITAN GRIP</h2>
+            <ul class="specs">
+                <li><i class="fa-solid fa-anchor"></i> Poids de domination au sol</li>
+                <li><i class="fa-solid fa-hand-fist"></i> Grip ultra-rugueux</li>
+                <li><i class="fa-solid fa-lock"></i> Col indéformable</li>
+            </ul>
+            <div class="footer-card">
+                <div class="price">155€</div>
+                <a href="#" class="btn-buy">SÉLECTIONNER</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 60px; opacity: 0.3; font-family: 'Syncopate'; font-size: 0.6em;">
+        CYBERNETIC JUDO GEAR // MODEL 2026 // ALL RIGHTS RESERVED
+    </footer>
+
+</body>
+</html>

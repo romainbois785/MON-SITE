@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WARRIOR PROFILER | JUDOGI STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Syncopate:wght@700&family=Space+Mono&family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --red: #ff003c;
+            --gold: #d4af37;
+            --border: rgba(255, 255, 255, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('hautdekim.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Kanit', sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .top-credit {
+            position: fixed;
+            top: 25px;
+            font-family: 'Space Mono';
+            font-size: 0.7em;
+            letter-spacing: 5px;
+            color: var(--red);
+            text-transform: uppercase;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 20px;
+            border: 1px solid var(--red);
+        }
+
+        .game-container {
+            width: 100%;
+            max-width: 850px;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            padding: 50px;
+            position: relative;
+        }
+
+        /* Barre de progression */
+        .progress-wrapper {
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.05);
+            margin-bottom: 40px;
+        }
+        #progress-fill {
+            height: 100%;
+            width: 8.33%; /* 1/12 */
+            background: var(--red);
+            box-shadow: 0 0 15px var(--red);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .step-counter {
+            font-family: 'Space Mono';
+            font-size: 0.8em;
+            color: var(--red);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .question-box { display: none; animation: slideIn 0.4s ease-out; }
+        .question-box.active { display: block; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-text {
+            font-size: 2.4em;
+            font-weight: 900;
+            margin-bottom: 40px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .options-grid { display: grid; gap: 15px; }
+        
+        .option-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 22px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .option-card:hover {
+            background: rgba(255, 0, 60, 0.15);
+            border-color: var(--red);
+            transform: scale(1.02);
+        }
+
+        .option-icon { font-size: 1.6em; width: 40px; text-align: center; color: var(--red); }
+        .option-info strong { display: block; font-family: 'Syncopate'; font-size: 0.8em; margin-bottom: 4px; }
+        .option-info span { font-size: 0.85em; color: #999; font-family: 'Space Mono'; }
+
+        /* Ecran Résultat */
+        #result-screen { display: none; text-align: center; }
+        .kanji-big { font-family: 'Noto Sans JP'; font-size: 7em; color: var(--gold); line-height: 1; }
+        .res-title { font-family: 'Syncopate'; font-size: 2.2em; color: var(--gold); margin: 20px 0; }
+        .res-desc { 
+            text-align: left; background: rgba(255,255,255,0.04); 
+            padding: 30px; line-height: 1.6; border-left: 5px solid var(--gold); 
+            margin-bottom: 30px; font-size: 1em;
+        }
+
+        .final-btn {
+            display: inline-block;
+            padding: 22px 50px;
+            background: var(--gold);
+            color: black;
+            text-decoration: none;
+            font-family: 'Syncopate';
+            font-weight: 900;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .final-btn:hover { box-shadow: 0 0 40px var(--gold); transform: translateY(-5px); }
+    </style>
+</head>
+<body>
+
+    <div class="top-credit">NEURAL ANALYZER // ROMAIN BOIS TD1</div>
+
+    <div class="game-container">
+        <div class="progress-wrapper"><div id="progress-fill"></div></div>
+
+        <div id="quiz-ui">
+            <div class="question-box active" data-step="1">
+                <span class="step-counter">DATA_NODE_01</span>
+                <div class="question-text">Ton gabarit naturel ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(1, 'power')"><div class="option-icon">🦍</div><div class="option-info"><strong>MASSIF</strong><span>Lourd, puissant, stable.</span></div></div>
+                    <div class="option-card" onclick="next(1, 'speed')"><div class="option-icon">🐆</div><div class="option-info"><strong>NERVEUX</strong><span>Fin, rapide, cardio élevé.</span></div></div>
+                    <div class="option-card" onclick="next(1, 'tech')"><div class="option-icon">🦒</div><div class="option-info"><strong>ÉLANCÉ</strong><span>Bras longs, souple, mobile.</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="2">
+                <span class="step-counter">DATA_NODE_02</span>
+                <div class="question-text">Ta saisie préférée ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(2, 'power')"><div class="option-icon">🦅</div><div class="option-info"><strong>HAUTE</strong><span>Dos ou col profond pour peser.</span></div></div>
+                    <div class="option-card" onclick="next(2, 'speed')"><div class="option-icon">🧤</div><div class="option-info"><strong>BASSE</strong><span>Manches et revers pour bouger.</span></div></div>
+                    <div class="option-card" onclick="next(2, 'tech')"><div class="option-icon">🧶</div><div class="option-info"><strong>UNILATÉRALE</strong><span>Contrôle d'un seul bras (Croisée).</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="3">
+                <span class="step-counter">DATA_NODE_03</span>
+                <div class="question-text">Ta réaction face au danger ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(3, 'power')"><div class="option-icon">🧱</div><div class="option-info"><strong>BLOCAGE</strong><span>Tu encaisses sans reculer.</span></div></div>
+                    <div class="option-card" onclick="next(3, 'speed')"><div class="option-icon">🏃</div><div class="option-info"><strong>ESQUIVE</strong><span>Tu sors de l'axe immédiatement.</span></div></div>
+                    <div class="option-card" onclick="next(3, 'tech')"><div class="option-icon">🔄</div><div class="option-info"><strong>CONTRE</strong><span>Tu profites de son élan.</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="4">
+                <span class="step-counter">DATA_NODE_04</span>
+                <div class="question-text">Au sol, tu cherches...</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(4, 'power')"><div class="option-icon">⚓</div><div class="option-info"><strong>L'OSAÉ</strong><span>Écraser en immobilisation.</span></div></div>
+                    <div class="option-card" onclick="next(4, 'speed')"><div class="option-icon">🌪️</div><div class="option-info"><strong>LE PASSAGE</strong><span>Vitesse de jambes pour passer.</span></div></div>
+                    <div class="option-card" onclick="next(4, 'tech')"><div class="option-icon">🐍</div><div class="option-info"><strong>LA CLÉ</strong><span>Étranglement ou bras direct.</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="5">
+                <span class="step-counter">DATA_NODE_05</span>
+                <div class="question-text">Ton Tokui-Waza (Technique) ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(5, 'power')"><div class="option-icon">💥</div><div class="option-info"><strong>URA-NAGE</strong><span>Souplesse arrière massive.</span></div></div>
+                    <div class="option-card" onclick="next(5, 'speed')"><div class="option-icon">🚀</div><div class="option-info"><strong>SEOÏ-NAGE</strong><span>Entrée foudroyante à genoux.</span></div></div>
+                    <div class="option-card" onclick="next(5, 'tech')"><div class="option-icon">🧹</div><div class="option-info"><strong>UCHI-MATA</strong><span>Le balayage haute couture.</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="6">
+                <span class="step-counter">DATA_NODE_06</span>
+                <div class="question-text">Ton endurance ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(6, 'power')"><div class="option-icon">🔋</div><div class="option-info"><strong>DIESEL</strong><span>Tu tiens la pression 10 min.</span></div></div>
+                    <div class="option-card" onclick="next(6, 'speed')"><div class="option-icon">🔋</div><div class="option-info"><strong>NITRO</strong><span>Gros pics d'intensité, puis repos.</span></div></div>
+                    <div class="option-card" onclick="next(6, 'tech')"><div class="option-icon">🔋</div><div class="option-info"><strong>ÉCO</strong><span>Tu gères tes efforts au millimètre.</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="7">
+                <span class="step-counter">DATA_NODE_07</span>
+                <div class="question-text">Ce qui t'énerve le plus ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(7, 'tech')"><div class="option-icon">🦟</div><div class="option-info"><strong>LE FUYARD</strong><span>Celui qui refuse le combat.</span></div></div>
+                    <div class="option-card" onclick="next(7, 'speed')"><div class="option-icon">🧱</div><div class="option-info"><strong>LE BLOQUEUR</strong><span>Celui qui tend les bras.</span></div></div>
+                    <div class="option-card" onclick="next(7, 'power')"><div class="option-icon">🧼</div><div class="option-info"><strong>L'ANGUILLE</strong><span>Celui qui glisse tout le temps.</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="8">
+                <span class="step-counter">DATA_NODE_08</span>
+                <div class="question-text">Ton état d'esprit ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(8, 'power')"><div class="option-icon">👹</div><div class="option-info"><strong>INTIMIDANT</strong><span>Gagner avant de monter sur le tapis.</span></div></div>
+                    <div class="option-card" onclick="next(8, 'speed')"><div class="option-icon">⚡</div><div class="option-info"><strong>ÉLECTRIQUE</strong><span>Toujours en mouvement, vif.</span></div></div>
+                    <div class="option-card" onclick="next(8, 'tech')"><div class="option-info">🧘</div><div class="option-info"><strong>ZEN</strong><span>Analyste, froid, observateur.</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="9">
+                <span class="step-counter">DATA_NODE_09</span>
+                <div class="question-text">Ton randori idéal ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(9, 'power')"><div class="option-icon">🥊</div><div class="option-info"><strong>BAGARRE</strong><span>Un combat dur à la limite.</span></div></div>
+                    <div class="option-card" onclick="next(9, 'speed')"><div class="option-icon">🏃</div><div class="option-info"><strong>RYTHME</strong><span>Beaucoup d'échanges rapides.</span></div></div>
+                    <div class="option-card" onclick="next(9, 'tech')"><div class="option-info">♟️</div><div class="option-info"><strong>ÉCHECS</strong><span>Un duel tactique de placement.</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="10">
+                <span class="step-counter">DATA_NODE_10</span>
+                <div class="question-text">Ta plus grande qualité ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(10, 'power')"><div class="option-icon">🛡️</div><div class="option-info"><strong>STABILITÉ</strong><span>Impossible à faire tomber.</span></div></div>
+                    <div class="option-card" onclick="next(10, 'speed')"><div class="option-icon">👟</div><div class="option-info"><strong>DÉPLACEMENT</strong><span>Jeu de jambes exceptionnel.</span></div></div>
+                    <div class="option-card" onclick="next(10, 'tech')"><div class="option-info">🧠</div><div class="option-info"><strong>TIMING</strong><span>Frapper au moment parfait.</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="11">
+                <span class="step-counter">DATA_NODE_11</span>
+                <div class="question-text">Ton idole Judo ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="next(11, 'power')"><div class="option-icon">👑</div><div class="option-info"><strong>TEDDY RINER</strong><span>La domination historique.</span></div></div>
+                    <div class="option-card" onclick="next(11, 'speed')"><div class="option-icon">🔥</div><div class="option-info"><strong>HIFUMI ABE</strong><span>L'explosivité pure.</span></div></div>
+                    <div class="option-card" onclick="next(11, 'tech')"><div class="option-icon">🥋</div><div class="option-info"><strong>SHOHEI ONO</strong><span>La perfection technique.</span></div></div>
+                </div>
+            </div>
+
+            <div class="question-box" data-step="12">
+                <span class="step-counter">DATA_NODE_12</span>
+                <div class="question-text">Objectif final ?</div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="finish('power')"><div class="option-icon">🔨</div><div class="option-info"><strong>DÉTRUIRE</strong><span>Ippon direct par la force.</span></div></div>
+                    <div class="option-card" onclick="finish('speed')"><div class="option-icon">🌪️</div><div class="option-info"><strong>SURPRENDRE</strong><span>Gagner avant qu'il comprenne.</span></div></div>
+                    <div class="option-card" onclick="finish('tech')"><div class="option-info">📖</div><div class="option-info"><strong>CONSTRUIRE</strong><span>Le beau geste, le Judo pur.</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-screen">
+            <div class="kanji-big" id="res-kanji">武</div>
+            <h2 class="res-title" id="res-title">PROFIL ÉTABLI</h2>
+            <div class="res-desc" id="res-desc"></div>
+            
+            <a href="index.html" id="final-link" class="final-btn">S'ÉQUIPER POUR LE COMBAT</a>
+            <br>
+            <button onclick="location.reload()" style="background:none; border:none; color:#555; font-family:'Space Mono'; margin-top:30px; cursor:pointer;">[ RÉINITIALISER LE SCAN ]</button>
+        </div>
+    </div>
+
+    <script>
+        let scores = { power: 0, speed: 0, tech: 0 };
+        let currentStep = 1;
+
+        function next(step, type) {
+            scores[type]++;
+            document.querySelector(`[data-step="${step}"]`).classList.remove('active');
+            currentStep++;
+            let nextBox = document.querySelector(`[data-step="${currentStep}"]`);
+            if(nextBox) {
+                nextBox.classList.add('active');
+                document.getElementById('progress-fill').style.width = (currentStep / 12 * 100) + "%";
+            }
+        }
+
+        function finish(type) {
+            scores[type]++;
+            document.getElementById('quiz-ui').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'block';
+            document.getElementById('progress-fill').style.width = "100%";
+
+            let winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            const title = document.getElementById('res-title');
+            const desc = document.getElementById('res-desc');
+            const kanji = document.getElementById('res-kanji');
+            const link = document.getElementById('final-link');
+
+            if(winner === 'power') {
+                kanji.innerText = "力";
+                title.innerText = "L'OGRE DE FER";
+                desc.innerHTML = "<strong>ANALYSE :</strong> Ton profil repose sur une puissance physique écrasante. Tu es un combattant de type 'Ancre', impossible à bouger une fois tes mains posées. <br><br><strong>CONSEIL DU SENSEI :</strong> Travaille ta respiration pour maintenir cette pression constante sur 4 minutes. <br><strong>ÉQUIPEMENT :</strong> Veste lourde 900g pour bloquer les saisies adverses.";
+                link.href = "hautdekimono.html";
+            } else if(winner === 'speed') {
+                kanji.innerText = "速";
+                title.innerText = "L'ÉCLAIR DIVIN";
+                desc.innerHTML = "<strong>ANALYSE :</strong> Ton Judo est basé sur la vitesse de réaction et l'explosion. Tu gagnes tes combats dans les premières secondes ou par des ruptures de rythme imprévisibles. <br><br><strong>CONSEIL DU SENSEI :</strong> Attention à la précision technique, ta vitesse ne doit pas devenir de la précipitation. <br><strong>ÉQUIPEMENT :</strong> Pantalon Light-Motion pour une mobilité totale.";
+                link.href = "basdekimono.html";
+            } else {
+                kanji.innerText = "智";
+                title.innerText = "L'ESPRIT RENARD";
+                desc.innerHTML = "<strong>ANALYSE :</strong> Tu es un tacticien pur. Tu observes, tu analyses et tu frappes au moment où l'adversaire commet l'erreur. Ton Judo est celui de l'intelligence et de la souplesse. <br><br><strong>CONSEIL DU SENSEI :</strong> Ne te laisse pas étouffer par les profils plus physiques, garde ta distance pour manoeuvrer. <br><strong>ÉQUIPEMENT :</strong> Ceinture Premium Soie, symbole de maîtrise.";
+                link.href = "ceinture.html";
+            }
+        }
+    </script>
+</body>
+</html>
