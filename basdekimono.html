@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pantalons de Judo | JUDOGI STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --red: #e63946;
+            --white: #f1faee;
+            --dark: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('basdekim.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: 'Kanit', sans-serif;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.8em, 5vw, 3.5em);
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            text-align: center;
+            background: linear-gradient(90deg, #888, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 6px solid var(--red);
+            letter-spacing: 4px;
+        }
+
+        h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.5em;
+            margin: 80px 0 40px 0;
+            color: var(--red);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* --- GRILLE DES PRODUITS --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .product-card {
+            background: #0a0a0a;
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Effet Néon Tournant */
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, var(--red));
+            animation: rotate 4s linear infinite;
+            display: none;
+            z-index: 0;
+        }
+
+        .product-card:hover::before { display: block; }
+
+        .product-card::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: #0d0d0d;
+            border-radius: 22px;
+            z-index: 1;
+        }
+
+        .product-card > * { position: relative; z-index: 2; }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 0 40px rgba(230, 57, 70, 0.4);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+            transition: 0.5s;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.1) translateY(-5px);
+            filter: drop-shadow(0 0 20px var(--red));
+        }
+
+        .product-card h3 {
+            font-size: 1.8em;
+            margin: 20px 0 10px 0;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .product-desc {
+            font-size: 0.9em;
+            color: #ccc;
+            height: 0;
+            opacity: 0;
+            transition: 0.4s;
+            overflow: hidden;
+        }
+
+        .product-card:hover .product-desc {
+            height: 65px;
+            opacity: 1;
+            margin-bottom: 15px;
+        }
+
+        .badge {
+            background: var(--red);
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-size: 0.8em;
+            font-weight: 900;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+        }
+
+        /* --- SECTION INFOS TECH --- */
+        .info-grid {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .info-box {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            border-top: 4px solid var(--red);
+            transition: 0.3s;
+        }
+
+        .info-box:hover { background: rgba(255,255,255,0.08); }
+
+        .info-box h4 {
+            color: var(--red);
+            font-family: 'Syncopate', sans-serif;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .info-box p { font-size: 0.95em; line-height: 1.6; color: #eee; }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-home {
+            margin: 80px 0;
+            text-decoration: none;
+            color: var(--white);
+            background: transparent;
+            padding: 15px 45px;
+            border-radius: 50px;
+            border: 2px solid var(--red);
+            transition: 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-home:hover {
+            background: var(--red);
+            box-shadow: 0 0 30px var(--red);
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>NOS BAS DE KIMONO</h1>
+
+    <div class="product-grid">
+        <div class="product-card">
+            <img src="pantalonbleu.png" alt="Pantalon Bleu">
+            <h3>Pantalon Bleu</h3>
+            <div class="product-desc">Coton sergé ultra-résistant. Renforts doublés aux genoux pour une durabilité maximale au sol (Ne-Waza).</div>
+            <span class="badge">Compétition</span>
+        </div>
+
+        <div class="product-card">
+            <img src="pantalonblanc.png" alt="Pantalon Blanc">
+            <h3>Pantalon Blanc</h3>
+            <div class="product-desc">Tissage léger et respirant. Idéal pour les entraînements intensifs et une grande liberté de mouvement.</div>
+            <span class="badge">Entraînement</span>
+        </div>
+    </div>
+
+    <h2>SPECIFICATIONS DATA</h2>
+    <div class="info-grid">
+        <div class="info-box">
+            <h4>RENFORTS GENOUX</h4>
+            <p>Le judo se pratique beaucoup au sol. Nos pantalons possèdent des <strong>doublures surpiquées</strong> du haut de la cuisse jusqu'au bas du tibia pour éviter les déchirures.</p>
+        </div>
+        <div class="info-box">
+            <h4>SYSTÈME DE FERMETURE</h4>
+            <p>Disponible en <strong>ceinture élastique</strong> (pour les enfants/débutants) ou avec le traditionnel <strong>cordon de serrage</strong> plat pour un maintien parfait en combat.</p>
+        </div>
+        <div class="info-box">
+            <h4>MATIÈRE PREMIUM</h4>
+            <p>Mélange de coton et polyester pour limiter le rétrécissement au lavage tout en gardant la <strong>souplesse</strong> nécessaire pour les balayages (Ashi-Waza).</p>
+        </div>
+    </div>
+
+    <a href="index.html" class="btn-home">← RETOUR VERS L'ACCUEIL </a>
+
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GRADES & CEINTURES | JUDOGI STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Rajdhani:wght@500;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --neon-red: #ff003c;
+            --gold: #d4af37;
+            --glass: rgba(0, 0, 0, 0.85);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('hautdekim.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- HEADER --- */
+        .header-section { text-align: center; margin-bottom: 80px; position: relative; }
+        
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.5em, 6vw, 3.5em);
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #444, #fff, #444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header-tag {
+            font-family: 'Space Mono';
+            color: var(--neon-red);
+            font-size: 0.8em;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        /* --- GRID --- */
+        .belt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            width: 100%;
+            max-width: 1300px;
+        }
+
+        /* --- CARD STYLE --- */
+        .belt-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            position: relative;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+        }
+
+        .belt-card:hover {
+            border-color: var(--neon-red);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(255, 0, 60, 0.2);
+        }
+
+        /* Marquage technique en arrière-plan */
+        .belt-card::before {
+            content: "OBI_TYPE_S01";
+            position: absolute;
+            top: 20px; right: 20px;
+            font-family: 'Space Mono';
+            font-size: 0.6em;
+            color: rgba(255,255,255,0.1);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.8));
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            transition: 0.6s;
+        }
+
+        .belt-card:hover .image-container img {
+            transform: scale(1.15) rotate(-2deg);
+        }
+
+        .belt-info { text-align: left; }
+        
+        .belt-name {
+            font-family: 'Syncopate';
+            font-size: 1.4em;
+            color: #fff;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .kyu-rank {
+            font-family: 'Space Mono';
+            font-size: 0.6em;
+            color: var(--neon-red);
+            background: rgba(255, 0, 60, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .belt-specs {
+            list-style: none;
+            margin: 20px 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .belt-specs li {
+            font-size: 0.85em;
+            color: #888;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .belt-specs li span { color: #ccc; font-weight: 700; }
+
+        .belt-desc {
+            font-size: 0.9em;
+            line-height: 1.5;
+            color: #bbb;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* --- BUTTON --- */
+        .buy-btn {
+            margin-top: auto;
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            font-family: 'Syncopate';
+            font-size: 0.7em;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .buy-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* --- KNOT SECTION --- */
+        .section-divider {
+            width: 100%;
+            max-width: 1300px;
+            margin: 100px 0 50px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .line { flex: 1; height: 1px; background: var(--border); }
+        
+        .knot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1300px;
+        }
+
+        .knot-step {
+            background: rgba(255,255,255,0.02);
+            padding: 30px;
+            border-left: 2px solid var(--neon-red);
+        }
+
+        .knot-step h4 { font-family: 'Space Mono'; color: var(--neon-red); margin-bottom: 10px; }
+        .knot-step p { font-size: 0.9em; color: #888; line-height: 1.4; }
+
+        .back-home {
+            margin: 100px 0;
+            text-decoration: none;
+            color: #555;
+            font-family: 'Space Mono';
+            letter-spacing: 4px;
+            transition: 0.3s;
+        }
+        .back-home:hover { color: var(--neon-red); }
+
+    </style>
+</head>
+<body>
+
+    <div class="header-section">
+        <span class="header-tag">Archives Techniques // Section Obi</span>
+        <h1>GRADES & BELTS</h1>
+    </div>
+
+    <div class="belt-grid">
+        
+        <div class="belt-card">
+            <div class="image-container"><img src="ceintureblanche.png" alt="Blanche"></div>
+            <div class="belt-info">
+                <div class="belt-name">SHIRO <span class="kyu-rank">6EME KYU</span></div>
+                <ul class="belt-specs">
+                    <li>Largeur : <span>4.5 cm</span></li>
+                    <li>Coutures : <span>8 lignes</span></li>
+                    <li>Signification : <span>Pureté / Début</span></li>
+                </ul>
+                <p class="belt-desc">"Le voyage de mille lieues commence par un seul pas. Symbole de la neige recouvrant la terre."</p>
+            </div>
+            <button class="buy-btn">COMMANDER LE GRADE</button>
+        </div>
+
+        <div class="belt-card">
+            <div class="image-container"><img src="ceinturejaune.png" alt="Jaune"></div>
+            <div class="belt-info">
+                <div class="belt-name">KIIRO <span class="kyu-rank">5EME KYU</span></div>
+                <ul class="belt-specs">
+                    <li>Largeur : <span>4.5 cm</span></li>
+                    <li>Matière : <span>100% Coton</span></li>
+                    <li>Signification : <span>Éveil / Soleil</span></li>
+                </ul>
+                <p class="belt-desc">"Le premier rayon de lumière qui perce l'obscurité. La graine de la connaissance germe."</p>
+            </div>
+            <button class="buy-btn">COMMANDER LE GRADE</button>
+        </div>
+
+        <div class="belt-card">
+            <div class="image-container"><img src="ceintureverte.png" alt="Verte"></div>
+            <div class="belt-info">
+                <div class="belt-name">MIDORI <span class="kyu-rank">3EME KYU</span></div>
+                <ul class="belt-specs">
+                    <li>Largeur : <span>4.7 cm</span></li>
+                    <li>Niveau : <span>Confirmé</span></li>
+                    <li>Signification : <span>Croissance</span></li>
+                </ul>
+                <p class="belt-desc">"La plante s'élève vers le ciel. La technique commence à devenir fluide et réflexive."</p>
+            </div>
+            <button class="buy-btn">COMMANDER LE GRADE</button>
+        </div>
+
+        <div class="belt-card">
+            <div class="image-container"><img src="ceinturemarron.png" alt="Marron"></div>
+            <div class="belt-info">
+                <div class="belt-name">CHAIRO <span class="kyu-rank">1ER KYU</span></div>
+                <ul class="belt-specs">
+                    <li>Poids : <span>Standard ITJF</span></li>
+                    <li>Résistance : <span>Haute Tension</span></li>
+                    <li>Signification : <span>Maturité</span></li>
+                </ul>
+                <p class="belt-desc">"L'écorce de l'arbre. Le judoka possède désormais une base solide et inébranlable."</p>
+            </div>
+            <button class="buy-btn">COMMANDER LE GRADE</button>
+        </div>
+
+        <div class="belt-card" style="border-color: var(--gold);">
+            <div class="image-container"><img src="ceinturenoire.png" alt="Noire"></div>
+            <div class="belt-info">
+                <div class="belt-name" style="color: var(--gold);">KURO <span class="kyu-rank" style="color: var(--gold); background: rgba(212,175,55,0.1);">1ER DAN</span></div>
+                <ul class="belt-specs">
+                    <li>Finition : <span>Soie Premium</span></li>
+                    <li>Broderie : <span>Or 24K possible</span></li>
+                    <li>Signification : <span>Expertise</span></li>
+                </ul>
+                <p class="belt-desc">"L'obscurité totale. Le cercle se referme pour recommencer une quête de perfection infinie."</p>
+            </div>
+            <button class="buy-btn" style="border-color: var(--gold);">ACCÉDER À L'ÉLITE</button>
+        </div>
+
+        <div class="belt-card">
+            <div class="image-container"><img src="broderie.png" alt="Custom"></div>
+            <div class="belt-info">
+                <div class="belt-name">CUSTOM <span class="kyu-rank">UNIQUE</span></div>
+                <ul class="belt-specs">
+                    <li>Atelier : <span>Kyoto, JP</span></li>
+                    <li>Délai : <span>15 jours</span></li>
+                    <li>Service : <span>Sur mesure</span></li>
+                </ul>
+                <p class="belt-desc">Créez une pièce d'exception. Gravure de votre nom en Kanji et choix de la densité du tissu.</p>
+            </div>
+            <button class="buy-btn" style="background: var(--neon-red); border: none;">PERSONNALISER</button>
+        </div>
+
+    </div>
+
+    <div class="section-divider">
+        <div class="line"></div>
+        <h2 style="font-family: 'Syncopate'; font-size: 1.2em; letter-spacing: 5px;">KNOT PROTOCOL</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="knot-grid">
+        <div class="knot-step">
+            <h4>STEP_01</h4>
+            <p>Placer le milieu de la ceinture sous le nombril (Tanden).</p>
+        </div>
+        <div class="knot-step">
+            <h4>STEP_02</h4>
+            <p>Faire le tour de la taille en croisant proprement dans le dos.</p>
+        </div>
+        <div class="knot-step">
+            <h4>STEP_03</h4>
+            <p>Ramener les deux pans devant et passer le brin du haut sous toutes les épaisseurs.</p>
+        </div>
+        <div class="knot-step">
+            <h4>STEP_04</h4>
+            <p>Former une boucle avec le brin du bas et serrer horizontalement.</p>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-home">← TERMINAL_RETOUR</a>
+
+</body>
+</html>
